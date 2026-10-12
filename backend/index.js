@@ -3,10 +3,10 @@ import { createHash, randomBytes, scryptSync, timingSafeEqual } from 'node:crypt
 import express from 'express'
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { getStore } from '@netlify/blobs'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const workingDirectory = process.cwd()
+const __dirname = path.basename(workingDirectory) === 'backend' ? workingDirectory : path.join(workingDirectory, 'backend')
 const dataPath = process.env.DATA_FILE || path.join(__dirname, 'data.json')
 const blobStore = process.env.NETLIFY === 'true' ? getStore('nextgen-finance-data') : null
 const blobKey = 'app-data.json'
@@ -392,6 +392,6 @@ app.post('/api/profiles/:profileId/activities/:activityId/complete', async (requ
 
 export default app
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && path.resolve(process.argv[1]) === path.join(__dirname, 'index.js')) {
   app.listen(port, () => console.log(`NextGen Finance API listening on http://localhost:${port}`))
 }
