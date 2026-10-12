@@ -4,9 +4,12 @@ import express from 'express'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { getStore } from '@netlify/blobs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const dataPath = process.env.DATA_FILE || path.join(__dirname, 'data.json')
+const blobStore = process.env.NETLIFY === 'true' ? getStore('nextgen-finance-data') : null
+const blobKey = 'app-data.json'
 const app = express()
 const port = Number(process.env.PORT || 3001)
 const chapterActivityIds = ['welcome', 'vocabulary', 'video-1', 'check-1', 'article-1', 'barter', 'video-2', 'check-2', 'article-2', 'sort', 'video-3', 'check-3', 'practice-money', 'practice-goods', 'practice-needs', 'needs-game', 'review', 'chapter-quiz', 'chapter-test', 'final-project']
@@ -55,7 +58,9 @@ const createProfile = ({ id, name, grade }) => ({
 })
 
 const readData = async () => {
-  const data = JSON.parse(await fs.readFile(dataPath, 'utf8'))
+  const data = blobStore
+    ? await blobStore.get(blobKey, { type: 'json' }) ?? { accounts: [], sessions: [], profiles: [] }
+    : JSON.parse(await fs.readFile(dataPath, 'utf8'))
   data.accounts = Array.isArray(data.accounts) ? data.accounts : []
   data.sessions = Array.isArray(data.sessions) ? data.sessions : []
   if (Array.isArray(data.profiles)) {
@@ -91,6 +96,10 @@ const readData = async () => {
   }
 }
 const writeData = async (data) => {
+  if (blobStore) {
+    await blobStore.setJSON(blobKey, data)
+    return
+  }
   const temporaryPath = `${dataPath}.${randomBytes(8).toString('hex')}.tmp`
   await fs.writeFile(temporaryPath, `${JSON.stringify(data, null, 2)}\n`)
   await fs.rename(temporaryPath, dataPath)
@@ -381,4 +390,8 @@ app.post('/api/profiles/:profileId/activities/:activityId/complete', async (requ
   }
 })
 
-app.listen(port, () => console.log(`NextGen Finance API listening on http://localhost:${port}`))
+export default app
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  app.listen(port, () => console.log(`NextGen Finance API listening on http://localhost:${port}`))
+}

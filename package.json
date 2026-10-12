@@ -16,6 +16,7 @@
     "preview": "vite preview frontend --config frontend/vite.config.ts"
   },
   "dependencies": {
+    "@netlify/blobs": "^11.1.4",
     "@netlify/functions": "^6.0.2",
     "cors": "^2.8.6",
     "express": "^5.3.0",

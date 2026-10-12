@@ -51,6 +51,8 @@ npm start
 
 For access over the public internet, deploy the frontend and API rather than exposing the Vite development server. Set `VITE_API_URL` to the deployed API base URL when building the frontend. The API must be reachable from every device that needs to sign in, and it must use persistent storage. `DATA_FILE` can set the JSON data file path for a single API instance; multiple API instances need a shared database before being used together. Set `API_PORT` to change the development API port used by both the server and Vite proxy.
 
+Netlify deployments use the `/api/*` rewrite in `netlify.toml` and the `netlify/functions/api.js` handler. Account and learning data is stored in Netlify Blobs so it persists across function invocations and devices; enable Netlify Blobs for the site before deploying. The Netlify function serves the existing Express API routes, so no separate `VITE_API_URL` is needed for that deployment.
+
 For backend development with automatic restart:
 
 ```bash
