@@ -1,10 +1,13 @@
+import { connectLambda } from '@netlify/blobs'
 import serverless from 'serverless-http'
-import app from '../../backend/index.js'
+import app, { configureNetlifyStorage } from '../../backend/index.js'
 
 const expressHandler = serverless(app)
 const functionPrefix = '/.netlify/functions/api'
 
 export const handler = async (event, context) => {
+  connectLambda(event)
+  configureNetlifyStorage()
   const url = new URL(event.rawUrl)
   const path = url.pathname.startsWith(functionPrefix)
     ? `/api${url.pathname.slice(functionPrefix.length)}`

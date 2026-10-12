@@ -8,7 +8,7 @@ import { getStore } from '@netlify/blobs'
 const workingDirectory = process.cwd()
 const __dirname = path.basename(workingDirectory) === 'backend' ? workingDirectory : path.join(workingDirectory, 'backend')
 const dataPath = process.env.DATA_FILE || path.join(__dirname, 'data.json')
-const blobStore = process.env.NETLIFY === 'true' ? getStore('nextgen-finance-data') : null
+let blobStore = null
 const blobKey = 'app-data.json'
 const app = express()
 const port = Number(process.env.PORT || 3001)
@@ -104,6 +104,9 @@ const writeData = async (data) => {
   await fs.writeFile(temporaryPath, `${JSON.stringify(data, null, 2)}\n`)
   await fs.rename(temporaryPath, dataPath)
 }
+export const configureNetlifyStorage = () => {
+  blobStore = getStore('nextgen-finance-data')
+}
 const findProfile = (data, id) => data.profiles.find((profile) => profile.id === id)
 const profileSummary = ({ id, name, grade }) => ({ id, name, grade })
 const publicAccount = ({ id, username, email }) => ({ id, username, email })
@@ -147,7 +150,8 @@ app.get('/api/profiles', async (_request, response) => {
     const account = accountFromRequest(data, _request)
     if (authorization.startsWith('Bearer ') && !account) return response.status(401).json({ error: 'Please log in again.' })
     response.json(data.profiles.filter((profile) => account ? profile.accountId === account.id : !profile.accountId).map(profileSummary))
-  } catch {
+  } catch (error) {
+    console.error('Could not load profiles:', error)
     response.status(500).json({ error: 'Could not load profiles.' })
   }
 })
@@ -176,7 +180,8 @@ app.post('/api/auth/register', async (request, response) => {
     data.sessions.push({ tokenHash: hashToken(token), accountId })
     await writeData(data)
     response.status(201).json({ token, account: publicAccount(account), profiles: [profileSummary(profile)] })
-  } catch {
+  } catch (error) {
+    console.error('Could not create account:', error)
     response.status(500).json({ error: 'Could not create your account.' })
   }
 })
@@ -195,7 +200,8 @@ app.post('/api/auth/login', async (request, response) => {
     data.sessions.push({ tokenHash: hashToken(token), accountId: account.id })
     await writeData(data)
     response.json({ token, account: publicAccount(account), profiles: data.profiles.filter((profile) => profile.accountId === account.id).map(profileSummary) })
-  } catch {
+  } catch (error) {
+    console.error('Could not log in:', error)
     response.status(500).json({ error: 'Could not log in.' })
   }
 })
