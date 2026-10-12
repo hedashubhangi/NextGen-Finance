@@ -1,0 +1,203 @@
+{
+  "profiles": [
+    {
+      "id": "alex-morgan",
+      "name": "Alex Morgan",
+      "grade": 1,
+      "joinedAt": "2026-09-26T03:02:35.881Z",
+      "completedLessons": [
+        1,
+        2
+      ],
+      "quizResults": [],
+      "badges": [
+        "Lesson Starter"
+      ],
+      "savedLessons": [],
+      "completedActivities": [
+        "welcome"
+      ],
+      "xp": 5,
+      "coins": 0,
+      "savingsGoal": null,
+      "learningState": {
+        "activeActivity": "vocabulary",
+        "questionProgress": {},
+        "activityProgress": {
+          "vocabulary": {
+            "index": 0,
+            "choice": null,
+            "checked": false,
+            "wordOrder": "0,1,6,5,2,4,3",
+            "answerOrder": "1,0,2"
+          }
+        }
+      }
+    },
+    {
+      "id": "hi-1790391755881",
+      "name": "Hi",
+      "grade": 2,
+      "joinedAt": "2026-09-26T03:02:35.881Z",
+      "completedLessons": [],
+      "quizResults": [],
+      "badges": [],
+      "savedLessons": [],
+      "completedActivities": [],
+      "xp": 0,
+      "coins": 0,
+      "savingsGoal": null,
+      "learningState": {
+        "activeActivity": "welcome",
+        "questionProgress": {},
+        "activityProgress": {}
+      }
+    },
+    {
+      "id": "alex-1790391809046",
+      "name": "Alex",
+      "grade": 1,
+      "joinedAt": "2026-09-26T03:03:29.047Z",
+      "completedLessons": [],
+      "quizResults": [],
+      "badges": [],
+      "savedLessons": [],
+      "completedActivities": [
+        "vocabulary"
+      ],
+      "xp": 10,
+      "coins": 0,
+      "savingsGoal": null,
+      "learningState": {
+        "activeActivity": "welcome",
+        "questionProgress": {},
+        "activityProgress": {}
+      }
+    },
+    {
+      "id": "3516d9826102e2168286deb7b392059d",
+      "name": "UI Test Learner",
+      "grade": 1,
+      "joinedAt": "2026-10-12T02:54:47.013Z",
+      "completedLessons": [],
+      "quizResults": [],
+      "badges": [],
+      "savedLessons": [],
+      "completedActivities": [],
+      "xp": 0,
+      "coins": 0,
+      "savingsGoal": null,
+      "learningState": {
+        "activeActivity": "welcome",
+        "questionProgress": {},
+        "activityProgress": {}
+      },
+      "accountId": "8be2638caebc5d0032e6ad6fe4d831d3"
+    },
+    {
+      "id": "3426e8cc4624059353e916b6acec2fbf",
+      "name": "Shubhangi Heda",
+      "grade": 1,
+      "joinedAt": "2026-10-12T16:58:01.953Z",
+      "completedLessons": [],
+      "quizResults": [],
+      "badges": [
+        "Lesson Starter"
+      ],
+      "savedLessons": [],
+      "completedActivities": [
+        "welcome",
+        "vocabulary",
+        "video-1",
+        "check-1",
+        "article-1"
+      ],
+      "xp": 30,
+      "coins": 4,
+      "savingsGoal": null,
+      "learningState": {
+        "activeActivity": "barter",
+        "questionProgress": {
+          "check-1": {
+            "order": [
+              1,
+              2,
+              10,
+              7,
+              5,
+              3,
+              6,
+              0,
+              4,
+              9,
+              11,
+              8
+            ],
+            "index": 6,
+            "seen": [
+              1,
+              2,
+              10,
+              7,
+              5,
+              3,
+              6
+            ],
+            "streak": 4,
+            "choice": 0,
+            "result": true
+          }
+        },
+        "activityProgress": {
+          "vocabulary": {
+            "index": 6,
+            "choice": "Working",
+            "checked": true
+          },
+          "article-1": {
+            "reflection": "Hard"
+          },
+          "barter": {
+            "gameVersion": 4,
+            "status": "fuel",
+            "distance": 1161,
+            "score": 600,
+            "energy": 4,
+            "lives": 2,
+            "timeLeft": 137,
+            "questionIndex": 5,
+            "obstacleIndex": 5,
+            "questionOrder": "11,1,6,9,10,8,7,3,5,2,4,0"
+          }
+        }
+      },
+      "accountId": "d415f63dfb8f97b70fa601bd920cb2a5"
+    }
+  ],
+  "accounts": [
+    {
+      "id": "8be2638caebc5d0032e6ad6fe4d831d3",
+      "username": "learner_1791773643825",
+      "email": "learner-1791773643825@example.test",
+      "salt": "b068ca9ad046539fd16853446b8a7d0f",
+      "passwordHash": "fe5b5ab59716acab35082e08ce1a3896d5dfca454c3c502d6c7cb6d21a0d81cc956f556946112ce6a9d781af8a571397825c479f890cde18b78ad59f57aa621e"
+    },
+    {
+      "id": "d415f63dfb8f97b70fa601bd920cb2a5",
+      "username": "Shubhangi",
+      "email": "heda.shubhangi@gmail.com",
+      "salt": "1640494b3fb9454d4dfb4785e763678f",
+      "passwordHash": "052cef8ff323c9b3dae8bbb6c48e334500676008d21f2e70243ee9f9572b8b8c1b7931d8525c8c85a73d056a3fadf6d2cc0bfd494a1b9238c3649dffca0dfba1"
+    }
+  ],
+  "sessions": [
+    {
+      "tokenHash": "c858f676fda5b87422940715e325d22bd5a43230c80224a6d06a9e666cbdc916",
+      "accountId": "8be2638caebc5d0032e6ad6fe4d831d3"
+    },
+    {
+      "tokenHash": "af55275c2d60f245691e28d07d1f4d2bb3a5d5f43269c82d6d93f721e8678cad",
+      "accountId": "d415f63dfb8f97b70fa601bd920cb2a5"
+    }
+  ]
+}
